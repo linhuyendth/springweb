@@ -1,0 +1,22 @@
+<div th:fragment="navbar">
+    <div class="navbar p-0" style="align-items: unset">
+        <img class="logo" src="img/logo.png">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="dropdown">
+            <button class="dropbtn">Management</button>
+            <div class="dropdown-content">
+                <a onclick="clickNavAccounts()">Accounts</a>
+                <a th:href="@{/products}">Products</a>
+                <a th:href="@{/categories}">Categories</a>
+            </div>
+        </div>
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

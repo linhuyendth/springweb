@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Accounts</title>
+    <link rel="stylesheet" th:href="@{/css/style-list.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h2 class="m-2">Manage Accounts</h2>
+
+        <div class="m-3">
+            <a class="h3" th:href="@{/accounts/add}">Add Account</a>
+        </div><br>
+
+        <div th:if="${message}" id="success-alert" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div th:if="${errorMessage}" id="error-alert" class="alert alert-danger text-center">
+            [[${errorMessage}]]
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="font-weight-bold bg-info text-white">
+                <tr>
+                    <td>ID</td>
+                    <td>Full Name</td>
+                    <td>Email</td>
+                    <td>Username</td>
+                    <td>Created Date</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="obj:${listAccounts}">
+                    <td th:text="${obj.id}">ID</td>
+                    <td th:text="${obj.fullName}">Full Name</td>
+                    <td th:text="${obj.email}">Email</td>
+                    <td th:text="${obj.username}">Username</td>
+                    <td th:text="${obj.createdDate}">Created Date</td>
+                    <td>
+                        <a class="h4 mr-3" th:href="${'/accounts/delete/'+obj.id}">Delete</a>
+                        <a class="h4" th:href="${'/accounts/edit/'+obj.id}">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    $("#success-alert").fadeTo(2500, 1000).slideUp(1000, function(){
+        $("#success-alert").slideUp(1000);
+    });
+    $("#error-alert").fadeTo(2500, 1000).slideUp(1000, function(){
+        $("#error-alert").slideUp(1000);
+    });
+</script>
+</html>

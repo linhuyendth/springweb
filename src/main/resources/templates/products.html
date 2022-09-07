@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Products</title>
+    <link rel="stylesheet" th:href="@{/css/style-list.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h2 class="m-2">Manage Products</h2>
+
+    <div class="m-3">
+        <a class="h3" th:href="@{/products/add}">Add Product</a>
+    </div><br>
+
+    <div th:if="${message}" id="success-alert" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div th:if="${errorMessage}" id="error-alert" class="alert alert-danger text-center">
+        [[${errorMessage}]]
+    </div>
+
+    <table class="table table-bordered">
+        <thead class="font-weight-bold bg-info text-white">
+        <tr>
+            <td>ID</td>
+            <td>Product Name</td>
+            <td>Price</td>
+            <td>Category</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="obj:${listProducts}">
+            <td th:text="${obj.id}">ID</td>
+            <td th:text="${obj.productName}">Product Name</td>
+            <td th:text="${obj.price}">Price</td>
+            <td th:text="${obj.category.categoryName}">Category</td>
+            <td>
+                <a class="h5 mr-3" th:href="${'/products/delete/'+obj.id}">Delete</a>
+                <a class="h5" th:href="${'/products/edit/'+obj.id}">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    $("#success-alert").fadeTo(2500, 1000).slideUp(1000, function(){
+        $("#success-alert").slideUp(1000);
+    });
+    $("#error-alert").fadeTo(2500, 1000).slideUp(1000, function(){
+        $("#error-alert").slideUp(1000);
+    });
+</script>
+</html>
